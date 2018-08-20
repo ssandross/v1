@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var adminRouter = require('./routes/admin');
 
+var connections = require('./models');
+
 var hbs = require('hbs');
 
 var app = express();

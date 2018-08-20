@@ -16,4 +16,13 @@ router.get('/calendar', function (req, res, next) {
     res.render('admin/calendar', data);
 });
 
+router.get('/client/new', function (req, res, next) {
+    res.render('admin/client/form');
+});
+
+router.post('/client/new', function (req, res, next) {
+    res.render('admin/client/form');
+});
+
+
 module.exports = router;
