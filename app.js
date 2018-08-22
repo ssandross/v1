@@ -44,7 +44,19 @@ app.use(
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-app.use('/admin', adminRouter);
+app.use('/admin', authChecker, adminRouter);
+
+//session
+function authChecker(req, res, next) {
+  if (req.session.auth) {
+    res.locals.session = req.session;
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
+app.use(authChecker);
+//end session
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

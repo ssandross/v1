@@ -28,6 +28,21 @@
                                 </select>
                             </div>
                             <div class="form-group">
+                                <label>Services</label>
+                                {{#each services}}
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="services" value="{{id}}">{{name}}
+                                </label>
+                                {{/each}}
+                            </div>
+                            <div class="form-group">
+                                <label>Level</label>
+                                <select name="level" class="form-control">
+                                    <option value="1">Administrator</option>
+                                    <option value="2">Client</option>
+                                    <option value="3">Employee</option>
+                                </select></div>
+                            <div class="form-group">
                                 <label>Password</label>
                                 <input name="password" type="password" class="form-control">
                             </div>

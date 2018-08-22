@@ -8,6 +8,12 @@ var user = require('./../models/user');
  * 
  */
 router.get('/', function (req, res, next) {
+
+    // service.find({ _id: ["5b7c1c095320f4331876cd6c", "5b7c5ab35320f4331876cd6e"] }, function (err, servicos) {
+    //     console.log(servicos);
+    // });
+
+
     res.render('admin/index', { title: 'Calendar' });
 });
 
@@ -47,7 +53,7 @@ router.post('/client/new', function (req, res, next) {
         res.redirect('/admin/client/' + response.id);
 
     });
-    
+
 });
 
 /**
@@ -71,6 +77,7 @@ router.post('/service/new', function (req, res, next) {
 
     var data = req.body;
     data.date = new Date();
+    data.client = req.session.client;
 
     service.create(data, function (err, response) {
         if (err) {
@@ -90,10 +97,33 @@ router.post('/service/new', function (req, res, next) {
  * 
  */
 router.get('/user/new', function (req, res, next) {
-    client.find({}, function (err, clients) {
 
-        res.render('admin/user/form', { clients: clients });
+    var sessData = req.session;
+    if (sessData.level > 2) {
+        res.redirect('/admin');
+        return;
+    }
+
+    // client.find({}, function (err, clients) {
+
+    //     res.render('admin/user/form', { clients: clients });
+    // });
+
+    client.find({}).exec().then(function (clients) {
+        var result = { clients: clients };
+        return result;
+    }).then(function (result) {
+        return service.find({ client: sessData.client }).exec()
+            .then(function (services) {
+                result.services = services;
+                return result;
+            })
+    }).then(function (result) {
+        res.render('admin/user/form', result);
     });
+
+
+
 });
 
 /**
@@ -109,14 +139,9 @@ router.post('/user/new', function (req, res, next) {
             console.log(err);
         }
 
-        var data = {
-            id: response.id
-        };
-
         res.redirect('/admin/user/new');
     });
 
 });
-
 
 module.exports = router;

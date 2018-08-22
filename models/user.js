@@ -17,6 +17,14 @@ var User = mongoose.Schema({
         type: String,
         required: true
     },
+    level: {
+        type: String,
+        required: true
+    },
+    services: {
+        type: Array,
+        required: true
+    },
     date: {
         type: Date,
         required: true

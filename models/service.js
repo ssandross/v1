@@ -4,7 +4,7 @@ require('mongoose-double')(mongoose);
 var SchemaTypes = mongoose.Schema.Types;
 
 var Service = mongoose.Schema({
-    clientId: {
+    client: {
         type: Object,
         require: true
     },
