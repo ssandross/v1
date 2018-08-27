@@ -103,20 +103,20 @@ $(document).ready(function () {
 
         },
         events: [
-            {
-                title: 'Meeting',
-                start: '2018-08-17 10:00',
-                end: '2018-08-17 15:00',
-                allDay: false,
-                className: 'info'
-            },
-            {
-                title: 'Meeting',
-                start: '2018-08-17 23:00',
-                end: '2018-08-18 15:00',
-                allDay: false,
-                className: 'success'
-            },
+            // {
+            //     title: 'Meeting',
+            //     start: '2018-08-17 10:00',
+            //     end: '2018-08-17 15:00',
+            //     allDay: false,
+            //     className: 'info'
+            // },
+            // {
+            //     title: 'Meeting',
+            //     start: '2018-08-17 23:00',
+            //     end: '2018-08-18 15:00',
+            //     allDay: false,
+            //     className: 'success'
+            // },
 
         ],
         // add event name to title attribute on mouseover
@@ -147,16 +147,21 @@ $(document).ready(function () {
         }
     });
 
-    calendar.fullCalendar('renderEvent',
-        {
-            title: 'title',
-            start: new Date(y, m, d, 20, 30),
-            end: new Date(y, m, d, 21, 30),
-            allDay: false,
-            className: 'important'
-        },
-        true // make the event "stick"
-    );
+    $.get("/admin/card-dates/5b7effb1dbb92101c82fc152", function (data) {
+        $.each(data, function (i, item) {
+            // alert(item.startDate);
 
+            calendar.fullCalendar('renderEvent',
+                {
+                    title: 'Sandro',
+                    start: item.startDate,
+                    end: item.endDate,
+                    allDay: false,
+                    className: 'success'
+                },
+                true // make the event "stick"
+            );
+        });
+    });
 
 });
