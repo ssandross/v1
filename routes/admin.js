@@ -35,6 +35,19 @@ router.get('/calendar', function (req, res, next) {
 /**
  * 
  */
+router.get('/client', function (req, res, next) {
+    client.find({}).exec().then(function (clients) {
+        var result = { clients: clients };
+        return result;
+    }).then(function (result) {
+        res.render('admin/client/index-client', result);
+    });
+    
+});
+
+/**
+ * 
+ */
 router.get('/client/new', function (req, res, next) {
     res.render('admin/client/form');
 });
