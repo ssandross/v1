@@ -5,6 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var MomentHandler = require("handlebars.moment");
+
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var adminRouter = require('./routes/admin');
@@ -12,6 +14,8 @@ var adminRouter = require('./routes/admin');
 var connections = require('./models');
 
 var hbs = require('hbs');
+
+MomentHandler.registerHelpers(hbs);
 
 var app = express();
 

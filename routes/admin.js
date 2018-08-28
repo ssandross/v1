@@ -66,17 +66,20 @@ router.post('/client/new', function (req, res, next) {
             res.render('/admin/client/form');
         }
 
-        res.redirect('/admin/client/' + response.id);
+        res.redirect('/admin/client/');
 
     });
 
 });
 
-/**
- * 
- */
-router.get('/client/:id', function (req, res, next) {
-    res.render('admin/client/index-client');
+router.get('/service', function (req, res, next) {
+    service.find({client : req.session.client}).exec().then(function (services) {
+        var result = { services: services };
+        return result;
+    }).then(function (result) {
+        res.render('admin/service/index-service', result);
+    });
+    
 });
 
 /**
