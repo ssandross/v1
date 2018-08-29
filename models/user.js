@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+var SchemaTypes = mongoose.Schema.Types;
+
 var User = mongoose.Schema({
     name: {
         type: String,
@@ -10,8 +12,8 @@ var User = mongoose.Schema({
         required: true
     },
     client: {
-        type: Object,
-        required: true
+        type: SchemaTypes.ObjectId,
+        require: true
     },
     password: {
         type: String,
@@ -22,7 +24,7 @@ var User = mongoose.Schema({
         required: true
     },
     services: {
-        type: Array,
+        type: [SchemaTypes.ObjectId],
         required: true
     },
     date: {

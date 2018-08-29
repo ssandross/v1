@@ -1,12 +1,14 @@
 var mongoose = require('mongoose');
 
+var SchemaTypes = mongoose.Schema.Types;
+
 var Card = mongoose.Schema({
     description: {
         type: String,
         required: true
     },
     register: {
-        type: Object,
+        type: SchemaTypes.ObjectId,
         required: true
     },
     services: {
@@ -16,6 +18,10 @@ var Card = mongoose.Schema({
     status: {
         type: Boolean,
         required: true
+    },
+    client: {
+        type: SchemaTypes.ObjectId,
+        require: true
     },
     date: {
         type: Date,

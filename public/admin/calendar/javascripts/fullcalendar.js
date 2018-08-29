@@ -18,7 +18,7 @@
 var defaults = {
 
 	// display
-	defaultView: 'month',
+	defaultView: 'day',
 	aspectRatio: 1.35,
 	header: {
 		left: 'title',
@@ -55,7 +55,7 @@ var defaults = {
 		day: 'dddd M/d'
 	},
 	timeFormat: { // for event elements
-		'': 'h(:mm)t' // default
+		'': 'hh:mm' // default
 	},
 	
 	// locale

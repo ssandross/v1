@@ -42,7 +42,7 @@ router.get('/client', function (req, res, next) {
     }).then(function (result) {
         res.render('admin/client/index-client', result);
     });
-    
+
 });
 
 /**
@@ -73,13 +73,13 @@ router.post('/client/new', function (req, res, next) {
 });
 
 router.get('/service', function (req, res, next) {
-    service.find({client : req.session.client}).exec().then(function (services) {
+    service.find({ client: req.session.client }).exec().then(function (services) {
         var result = { services: services };
         return result;
     }).then(function (result) {
         res.render('admin/service/index-service', result);
     });
-    
+
 });
 
 /**
@@ -106,6 +106,18 @@ router.post('/service/new', function (req, res, next) {
         res.redirect('/admin/service/new');
     });
 
+});
+
+/**
+ * 
+ */
+router.get('/user', function (req, res, next) {
+    user.find({ client: req.session.client }).exec().then(function (users) {
+        var result = { users: users };
+        return result;
+    }).then(function (result) {
+        res.render('admin/user/index-user', result);
+    });
 });
 
 /**
@@ -176,7 +188,7 @@ router.post('/register/new', function (req, res, next) {
             res.render('/admin/register/form');
         }
 
-        res.redirect('/admin/register/' + response.id);
+        res.redirect('/admin/register');
 
     });
 
@@ -185,8 +197,14 @@ router.post('/register/new', function (req, res, next) {
 /**
  * 
  */
-router.get('/register/:id', function (req, res, next) {
-    res.render('admin/register/index-register');
+router.get('/register', function (req, res, next) {
+    
+    register.find({ client: req.session.client }).exec().then(function (registers) {
+        var result = { registers: registers };
+        return result;
+    }).then(function (result) {
+        res.render('admin/register/index-register', result);
+    });
 });
 
 /**
@@ -238,6 +256,21 @@ router.post('/card/new', function (req, res, next) {
 /**
  * 
  */
+router.get('/card', function (req, res, next) {
+
+    // { client: req.session.client }
+    card.find().exec().then(function (cards) {
+        var result = { cards: cards };
+        return result;
+    }).then(function (result) {
+        res.render('admin/card/index-card', result);
+    });
+
+});
+
+/**
+ * 
+ */
 router.get('/card/:id', function (req, res, next) {
 
     service.find({ client: req.session.client }).exec()
@@ -270,6 +303,7 @@ router.post('/card/add-service-card', function (req, res, next) {
 
     var data = req.body;
     data.status = true;
+    data.client = req.session.client;
     data.date = new Date();
 
     cardService.create(data, function (err, response) {
@@ -285,11 +319,12 @@ router.post('/card/add-service-card', function (req, res, next) {
 /**
  * 
  */
-router.get('/card-dates/:id', function (req, res, next) {
+router.get('/card-dates', function (req, res, next) {
 
-    var cardId = req.params.id;
+    // var cardId = req.params.id;
 
-    cardService.find({ cardId: cardId }).exec()
+    // { cardId: cardId }
+    cardService.find().exec()
         .then(function (dates) {
 
             res.send(dates);

@@ -5,7 +5,7 @@ var SchemaTypes = mongoose.Schema.Types;
 
 var Service = mongoose.Schema({
     client: {
-        type: Object,
+        type: SchemaTypes.ObjectId,
         require: true
     },
     name: {

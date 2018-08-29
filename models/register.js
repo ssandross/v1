@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+var SchemaTypes = mongoose.Schema.Types;
+
 var Register = mongoose.Schema({
     name: {
         type: String,
@@ -10,8 +12,8 @@ var Register = mongoose.Schema({
         required: true
     },
     client: {
-        type: Object,
-        required: true
+        type: SchemaTypes.ObjectId,
+        require: true
     },
     services: {
         type: Object,

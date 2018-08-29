@@ -47,8 +47,8 @@ $(document).ready(function () {
         editable: true,
         firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
         selectable: true,
-        defaultView: 'month',
-
+        defaultView: 'agendaDay',
+        disableResizing: true,
         axisFormat: 'HH:mm',
         columnFormat: {
             month: 'ddd',    // Mon
@@ -63,21 +63,21 @@ $(document).ready(function () {
         },
         allDaySlot: false,
         selectHelper: true,
-        select: function (start, end, allDay) {
-            var title = prompt('Event Title:');
-            if (title) {
-                calendar.fullCalendar('renderEvent',
-                    {
-                        title: title,
-                        start: start,
-                        end: end,
-                        allDay: allDay
-                    },
-                    true // make the event "stick"
-                );
-            }
-            calendar.fullCalendar('unselect');
-        },
+        // select: function (start, end, allDay) {
+        //     var title = prompt('Event Title:');
+        //     if (title) {
+        //         calendar.fullCalendar('renderEvent',
+        //             {
+        //                 title: title,
+        //                 start: start,
+        //                 end: end,
+        //                 allDay: allDay
+        //             },
+        //             true // make the event "stick"
+        //         );
+        //     }
+        //     calendar.fullCalendar('unselect');
+        // },
         droppable: true, // this allows things to be dropped onto the calendar !!!
         drop: function (date, allDay) { // this function is called when something is dropped
 
@@ -147,7 +147,7 @@ $(document).ready(function () {
         }
     });
 
-    $.get("/admin/card-dates/5b7effb1dbb92101c82fc152", function (data) {
+    $.get("/admin/card-dates", function (data) {
         $.each(data, function (i, item) {
             // alert(item.startDate);
 

@@ -1,12 +1,14 @@
 var mongoose = require('mongoose');
 
+var SchemaTypes = mongoose.Schema.Types;
+
 var CardService = mongoose.Schema({
     cardId: {
-        type: Object,
+        type: SchemaTypes.ObjectId,
         required: true
     },
     serviceId: {
-        type: Object,
+        type: SchemaTypes.ObjectId,
         required: true
     },
     startDate: {
