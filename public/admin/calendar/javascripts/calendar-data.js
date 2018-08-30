@@ -151,13 +151,16 @@ $(document).ready(function () {
         $.each(data, function (i, item) {
             // alert(item.startDate);
 
+            var startDate = new Date(item.startDate);
+            var endDate = new Date(item.endDate);
+
             calendar.fullCalendar('renderEvent',
                 {
                     title: 'Sandro',
-                    start: item.startDate,
-                    end: item.endDate,
+                    start: startDate,
+                    end: endDate,
                     allDay: false,
-                    className: 'success'
+                    className: 'info2'
                 },
                 true // make the event "stick"
             );

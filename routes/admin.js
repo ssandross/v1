@@ -7,6 +7,8 @@ var register = require('./../models/register');
 var card = require('./../models/card');
 var cardService = require('./../models/card-service');
 
+var moment = require('moment');
+
 /**
  * 
  */
@@ -305,6 +307,8 @@ router.post('/card/add-service-card', function (req, res, next) {
     data.status = true;
     data.client = req.session.client;
     data.date = new Date();
+    data.startDate = moment(data.startDate, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
+    data.endDate = moment(data.endDate, 'DD/MM/YYYY HH:mm').format('YYYY-MM-DD HH:mm');
 
     cardService.create(data, function (err, response) {
         if (err) {
@@ -326,7 +330,6 @@ router.get('/card-dates', function (req, res, next) {
     // { cardId: cardId }
     cardService.find().exec()
         .then(function (dates) {
-
             res.send(dates);
         });
 
